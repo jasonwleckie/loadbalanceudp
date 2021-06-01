@@ -2,8 +2,8 @@
 # author: Jason Leckie
 # date: June 1, 2021
 # purpose: 
-#   query EC2 api to find running instances whose tag:Name is 'sre-candidate'
-#   push the ipaddr(s) to a R53 zone
+#   query EC2 api to find running private instances whose tag:Name is 'sre-candidate'
+#   push the private ipaddr(s) to a R53 zone
 #   record name should be 'udp.${domain_name} 
 
 
@@ -108,7 +108,7 @@ def new_r53_records(name, ipaddrs, domain):
 
 def main():
 
-    ### Create a new R53 record using the ipaddrs from any running servers with the TAG_VALUE
+    ### Create a new R53 record using the private ipaddrs from any running servers with the TAG_VALUE
     new_r53_records(RECORD_NAME, get_running_servers_ipaddrs(TAG_VALUE), get_domain(HOSTED_ZONE_ID))
 
 if __name__ == "__main__":
